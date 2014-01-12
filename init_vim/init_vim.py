@@ -90,3 +90,7 @@ def install():
     # install_nerdtree()
     install_vundle()
     install_jedi_vim()
+
+
+def __name__ == '__main__':
+    install()
