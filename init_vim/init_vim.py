@@ -92,5 +92,5 @@ def install():
     install_jedi_vim()
 
 
-def __name__ == '__main__':
+if __name__ == '__main__':
     install()
