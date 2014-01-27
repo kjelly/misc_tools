@@ -78,7 +78,21 @@ def install_vundle():
 def install_jedi_vim():
     vimrc_path = os.path.join(home_dir, '.vimrc')
     with open(vimrc_path, 'a') as ftr:
-        ftr.write("Bundle 'git://github.com/davidhalter/jedi-vim'")
+        ftr.write("Bundle 'git://github.com/davidhalter/jedi-vim'\n")
+    vundle_install_tip()
+
+
+def install_golang_plugin():
+    vimrc_path = os.path.join(home_dir, '.vimrc')
+    with open(vimrc_path, 'a') as ftr:
+        ftr.write("Bundle 'https://github.com/jnwhiteh/vim-golang'\n")
+    vundle_install_tip()
+
+
+def install_scala_plugin():
+    vimrc_path = os.path.join(home_dir, '.vimrc')
+    with open(vimrc_path, 'a') as ftr:
+        ftr.write("Bundle 'derekwyatt/vim-scala'\n")
     vundle_install_tip()
 
 
@@ -90,6 +104,8 @@ def install():
     # install_nerdtree()
     install_vundle()
     install_jedi_vim()
+    install_golang_plugin()
+    install_scala_plugin()
 
 
 if __name__ == '__main__':
