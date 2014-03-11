@@ -13,12 +13,26 @@ c = docker.Client(base_url='unix://var/run/docker.sock',
                   timeout=10)
 
 
+class CustomDockerCommand(object):
+
+    @staticmethod
+    def remove_all_container():
+        cmd = "sudo docker rm `docker ps -notrunc -a -q`"
+        if raw_input("Are you sure? [y/N]") == 'y':
+            os.system(cmd)
+
+    @classmethod
+    def get_custom_command_list(cls):
+        exclude = ['get_custom_command_list', '__weakref__']
+        return list(set(dir(cls)) - set(dir(type) + exclude))
+
+
 cmd_list = ["attach", "build", "commit", "cp", "diff",
             "events", "export", "histor", "images", "import",
             "info", "insert", "inspec", "kill", "load", "login",
             "logs", "port", "ps", "pull", "push", "restar", "rm",
             "rmi", "run", "save", "search", "start", "stop", "tag",
-            "top", "version", "wait"] + ['shell']
+            "top", "version", "wait"] + ['shell'] + CustomDockerCommand.get_custom_command_list()
 
 
 def run_cmd(text, cmd):
@@ -37,6 +51,11 @@ def complete_cmd(text, line, start_index, end_index, cmd):
 class DockerShellMeta(type):
     def __new__(cls, cls_name, bases, attrs):
         for i in cmd_list:
+            if i == 'shell':
+                continue
+            elif i in CustomDockerCommand.get_custom_command_list():
+                attrs['do_' + i] = lambda *args:getattr(CustomDockerCommand, i)()
+                continue
             if i != 'shell':
                 attrs['do_' + i] = functools.partial(run_cmd, cmd=i)
                 attrs['complete_' + i] = functools.partial(complete_cmd, cmd=i)
@@ -119,6 +138,9 @@ def start(id, port=None):
     c.start(result, port_bindings=port)
 
 
+
+
+
 def main():
     argv = sys.argv
     if os.geteuid() != 0:
@@ -128,12 +150,14 @@ def main():
         print 'default', argv
         os.system("sudo docker")
         return
-    argv[1] = find_one(argv[1], cmd_list)
-    if argv[1] == 'start':
+    cmd = argv[1] = find_one(argv[1], cmd_list)
+    if cmd == 'start':
         start_wrapper(argv[2:])
     if argv[1] == 'shell':
         shell = DockerShell()
         shell.cmdloop()
+    elif cmd in CustomDockerCommand.get_custom_command_list():
+        getattr(CustomDockerCommand, cmd)()
     else:
         cmd = "sudo docker %s" % ' '.join(argv[1:])
         print cmd
