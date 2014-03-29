@@ -96,6 +96,13 @@ def install_scala_plugin():
     vundle_install_tip()
 
 
+def install_scala_plugin():
+    vimrc_path = os.path.join(home_dir, '.vimrc')
+    with open(vimrc_path, 'a') as ftr:
+        ftr.write("Bundle 'pangloss/vim-javascript'\n")
+    vundle_install_tip()
+
+
 def install():
     init_vim_dir()
     init_vimrc()
