@@ -68,39 +68,36 @@ Please run below command in vim.
     '''
 
 
+
 def install_vundle():
     install_to_bundle("https://github.com/gmarik/vundle.git")
-    vimrc_path = os.path.join(home_dir, '.vimrc')
-    with open(vimrc_path, 'a') as ftr:
-        ftr.write(vundle_settings)
+    write_to_vimrc(vundle_settings)
 
 
 def install_jedi_vim():
-    vimrc_path = os.path.join(home_dir, '.vimrc')
-    with open(vimrc_path, 'a') as ftr:
-        ftr.write("Bundle 'git://github.com/davidhalter/jedi-vim'\n")
+    write_to_vimrc("Bundle 'git://github.com/davidhalter/jedi-vim'\n")
     vundle_install_tip()
 
 
 def install_golang_plugin():
-    vimrc_path = os.path.join(home_dir, '.vimrc')
-    with open(vimrc_path, 'a') as ftr:
-        ftr.write("Bundle 'https://github.com/jnwhiteh/vim-golang'\n")
+    write_to_vimrc("Bundle 'https://github.com/jnwhiteh/vim-golang'\n")
     vundle_install_tip()
 
 
 def install_scala_plugin():
-    vimrc_path = os.path.join(home_dir, '.vimrc')
-    with open(vimrc_path, 'a') as ftr:
-        ftr.write("Bundle 'derekwyatt/vim-scala'\n")
+    write_to_vimrc("Bundle 'derekwyatt/vim-scala'\n")
     vundle_install_tip()
 
 
 def install_scala_plugin():
+    write_to_vimrc("Bundle 'pangloss/vim-javascript'\n")
+    vundle_install_tip()
+
+
+def write_to_vimrc(content):
     vimrc_path = os.path.join(home_dir, '.vimrc')
     with open(vimrc_path, 'a') as ftr:
-        ftr.write("Bundle 'pangloss/vim-javascript'\n")
-    vundle_install_tip()
+        ftr.write(content)
 
 
 def install():
