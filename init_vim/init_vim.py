@@ -94,6 +94,11 @@ def install_scala_plugin():
     vundle_install_tip()
 
 
+def install_scala_plugin():
+    write_to_vimrc("Bundle 'JesseKPhillips/d.vim'\n")
+    vundle_install_tip()
+
+
 def write_to_vimrc(content):
     vimrc_path = os.path.join(home_dir, '.vimrc')
     with open(vimrc_path, 'a') as ftr:
