@@ -120,6 +120,8 @@ def install():
     install_jedi_vim()
     install_golang_plugin()
     install_scala_plugin()
+    install_d_plugin()
+    install_javascript_plugin()
 
 
 if __name__ == '__main__':
