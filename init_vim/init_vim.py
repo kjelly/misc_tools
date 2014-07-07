@@ -89,13 +89,18 @@ def install_scala_plugin():
     vundle_install_tip()
 
 
-def install_scala_plugin():
+def install_javascript_plugin():
     write_to_vimrc("Bundle 'pangloss/vim-javascript'\n")
     vundle_install_tip()
 
 
-def install_scala_plugin():
+def install_d_plugin():
     write_to_vimrc("Bundle 'JesseKPhillips/d.vim'\n")
+    vundle_install_tip()
+
+
+def install_prolog_plugin():
+    write_to_vimrc("Bundle 'adimit/prolog.vim'\n")
     vundle_install_tip()
 
 
