@@ -58,6 +58,11 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 filetype plugin indent on     " required!
+
+let g:jedi#completions_command = "<C-n>"
+let popup_select_first = 0
+let @/ = ""
+set nu
 '''
 
 
