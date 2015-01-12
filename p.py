@@ -27,7 +27,7 @@ def write_data(path, data):
 def show(key):
     database_path = get_database_path()
     data = read_data(database_path)
-    print(data.get(key, ''))
+    print(data.get(key, {}).get('value', ''))
 
 
 def list_key_value():
@@ -43,10 +43,10 @@ def delete_key(key):
     write_data(database_path, data)
 
 
-def set_key_value(key, value):
+def set_key_value(key, value, comment=''):
     database_path = get_database_path()
     data = read_data(database_path)
-    data[key] = value
+    data[key] = {'value': value, 'comment': comment}
     write_data(database_path, data)
 
 
